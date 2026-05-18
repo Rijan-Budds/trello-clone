@@ -15,7 +15,6 @@ export async function loginAction(prevState: FormState, formData: FormData): Pro
         return { error: 'Please fill in all fields.' }
     }
 
-    // Simple format validation since we're disabling browser default tooltips
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
         return { error: 'Please enter a valid email address.' }
@@ -30,6 +29,5 @@ export async function loginAction(prevState: FormState, formData: FormData): Pro
         return { error: 'Something went wrong. Please try again.' }
     }
 
-    // Safe to redirect out here now that it won't be caught by a generic catch block
     redirect('/page')
 }
