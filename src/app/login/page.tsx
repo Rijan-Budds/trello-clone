@@ -3,8 +3,38 @@
 import { useActionState, useState } from 'react'
 import { loginAction, FormState } from './action'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 
 const initialState: FormState = {}
+
+// 1. Define your validation schemas outside the components to prevent re-renders
+const emailRegexWithoutDomainNumbers = /^[A-Z0-9._%+-]+@[A-Z.-]+\.[A-Z]{2,}$/i;
+
+const LoginSchema = Yup.object().shape({
+    email: Yup.string()
+        .required('Required')
+        .email('Invalid email address')
+        .matches(emailRegexWithoutDomainNumbers, 'Email domain cannot contain numbers'),
+    password: Yup.string()
+        .required('Required')
+        .min(8, 'Password must be at least 8 characters long')
+})
+
+const RegisterSchema = Yup.object().shape({
+    name: Yup.string()
+        .required('Required')
+        .trim()
+        .min(2, 'Name must be at least 2 characters long')
+        .max(30, 'Name must not exceed 30 characters')
+        .matches(/^[^\d]*$/, 'Name cannot contain numbers'),
+    email: Yup.string()
+        .required('Required')
+        .email('Invalid email address')
+        .matches(emailRegexWithoutDomainNumbers, 'Email domain cannot contain numbers'),
+    password: Yup.string()
+        .required('Required')
+        .min(8, 'Password must be at least 8 characters long')
+})
 
 export default function LoginForm() {
     const [state, formAction] = useActionState(loginAction, initialState)
@@ -17,24 +47,7 @@ export default function LoginForm() {
 
                 <Formik
                     initialValues={{ email: '', password: '' }}
-                    validate={(values) => {
-                        const errors: Record<string, string> = {}
-
-                        if (!values.email) {
-                            errors.email = 'Required'
-                        } else if (
-                            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                        ) {
-                            errors.email = 'Invalid email address'
-                        }
-
-                        if (!values.password) {
-                            errors.password = 'Required'
-                        } else if (values.password.length < 8) {
-                            errors.password = 'Password must be at least 8 characters long'
-                        }
-                        return errors
-                    }}
+                    validationSchema={LoginSchema} // 2. Swapped validate for validationSchema
                     onSubmit={(values, { setSubmitting }) => {
                         const formData = new FormData()
                         formData.append('email', values.email)
@@ -139,33 +152,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
                         email: '',
                         password: ''
                     }}
-                    validate={values => {
-                        const errors: Record<string, string> = {};
-
-                        if (!values.name) {
-                            errors.name = 'Required';
-                        } else if (values.name.trim().length < 2) {
-                            errors.name = "Name must be at least 2 characters long"
-                        } else if (values.name.trim().length > 30) {
-                            errors.name = "Name must not exceed 30 characters"
-                        } else if (/\d/.test(values.name)) {
-                            errors.name = 'Name cannot contain numbers';
-                        }
-
-                        if (!values.email) {
-                            errors.email = 'Required';
-                        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-                            errors.email = 'Invalid email address'
-                        }
-
-                        if (!values.password) {
-                            errors.password = 'Required'
-                        } else if (values.password.length < 8) {
-                            errors.password = 'Password must be at least 8 characters long'
-                        }
-
-                        return errors;
-                    }}
+                    validationSchema={RegisterSchema}
                     onSubmit={(values, { setSubmitting }) => {
                         setTimeout(() => {
                             alert(JSON.stringify(values, null, 2));
