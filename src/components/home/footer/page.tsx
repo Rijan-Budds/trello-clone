@@ -3,21 +3,18 @@
 import Link from 'next/link'
 import { Mail } from 'lucide-react'
 
-// Custom Trello SVG Icon to avoid dependency version issues
 const TrelloIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path d="M19.03 3A4.97 4.97 0 0 1 24 7.97v8.06A4.97 4.97 0 0 1 19.03 21H4.97A4.97 4.97 0 0 1 0 16.03V7.97A4.97 4.97 0 0 1 4.97 3h14.06zM9.03 6H4.97A.97.97 0 0 0 4 6.97v6.06c0 .54.43.97.97.97h4.06a.97.97 0 0 0 .97-.97V6.97A.97.97 0 0 0 9.03 6zm10 0h-4.06a.97.97 0 0 0-.97.97v10.06c0 .54.43.97.97.97h4.06a.97.97 0 0 0 .97-.97V6.97a.97.97 0 0 0-.97-.97z" />
   </svg>
 )
 
-// Custom Twitter (X) SVG
 const TwitterIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 )
 
-// Custom GitHub SVG
 const GithubIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
@@ -25,7 +22,6 @@ const GithubIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
   </svg>
 )
 
-// Custom LinkedIn SVG
 const LinkedinIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -41,7 +37,6 @@ export default function Footer() {
     <footer className="w-full bg-slate-950/80 border-t border-slate-900/60 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          {/* Brand/About */}
           <div className="space-y-6 xl:col-span-1">
             <Link href="/" className="flex items-center gap-2 group w-fit">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-200">
@@ -87,11 +82,6 @@ export default function Footer() {
                 <li>
                   <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">
                     Integrations
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">
-                    Pricing
                   </a>
                 </li>
                 <li>
