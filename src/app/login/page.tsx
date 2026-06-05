@@ -295,7 +295,7 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
                         validationSchema={RegisterSchema}
                         onSubmit={async (values, { setSubmitting, resetForm }) => {
                             try {
-                                const response = await fetch("api/register", {
+                                const response = await fetch("/api/register", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     credentials: "include",
